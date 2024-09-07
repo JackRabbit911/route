@@ -1,18 +1,7 @@
 {
-    "name": "alpha-zeta/route",
-    "description": "Fast and flexible routing library",
-    "keywords": ["php", "route", "routing"],
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Alexey Zaytsev",
-            "email": "world.zay@gmail.com"
-        }
-    ],
     "repositories": [
         {
-            "type": "vcs",
+            "type": "git",
             "url": "https://github.com/JackRabbit911/route"
         }
     ],
@@ -21,16 +10,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Az\\Route\\": "alpha-zeta/route/src/"
+            "Az\\Route\\": "vendor/alpha-zeta/route/src/"
         }
     },
     "require-dev": {
         "phpunit/phpunit": "^11",
-        "mockery/mockery": "^1.6"
+        "mockery/mockery": "^1.6",
+        "httpsoft/http-message": "^1.0",
+        "httpsoft/http-server-request": "^1.0",
+        "httpsoft/http-runner": "^1.0",
+        "httpsoft/http-response": "^1.0"
     },
     "autoload-dev": {
         "psr-4": { 
-            "Tests\\Az\\Route\\": "alpha-zeta/route/tests/"
+            "Tests\\Az\\Route\\": "vendor/alpha-zeta/route/tests/"
         }
     }
 }
