@@ -10,6 +10,12 @@
             "email": "world.zay@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/JackRabbit911/route"
+        }
+    ],
     "require": {
         "php": "^8.2"
     },
