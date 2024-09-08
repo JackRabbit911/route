@@ -3,6 +3,28 @@ Fast and flexible routing library
 ## Install
 composer require alpha-zeta/route
 ## Usage
-use Az\RouteCollection;
+```php
+use Az\Route\RouteCollectionInterface;
+use App\Http\Conroller\Home;
 
-class App {}
+class App {
+
+    private RouteCollectionInterface $route;
+
+    public function __construct(RouteCollectionInterface $route)
+    {
+        $this->route = $route;
+    }
+
+    public function run()
+    {
+        $this->route->get('/hello', function () {
+            return 'Hello, World!';
+        });
+
+        $this->route->conroller('/image/{id}/{action?}/{slug?}', Image::class, 'image')
+
+        $this->route->get('/', Home::class, 'home');
+    }
+}
+```
