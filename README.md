@@ -25,12 +25,16 @@ class App
             return 'Hello, World!';
         });
 
-        $this->route->conroller('/image/{id}/{action?}/{slug?}', Image::class, 'image');
+        $this->route->conroller('/image/{id}/{action?}/{slug?}', Image::class, 'image')
+            ->tokens([
+                'id' => '\d+',
+                'action' => 'thumbnail|origin|',
+            ]);
 
-        $this->route->get('/', [Home::class, 'index'], 'home');
+        $this->route->get('/', [Home::class, 'index'], 'home')
+            ->pipe(AuthMiddleware::class);
 
         $response = $this->pipeline->process($this->request, $this->defaultHandler);
-
         $this->emitter->emit($response);
     }
 }
