@@ -1,6 +1,6 @@
 {
     "name": "alpha-zeta/route",
-    "description": "fast and flexible routing library",
+    "description": "Fast and flexible routing library",
     "keywords": ["php", "route", "routing"],
     "type": "library",
     "license": "MIT",
