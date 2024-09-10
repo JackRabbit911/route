@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Az\\Route\\": "vendor/alpha-zeta/route/src/"
+            "Az\\Route\\": "src/"
         }
     },
     "require-dev": {
@@ -28,7 +28,7 @@
     },
     "autoload-dev": {
         "psr-4": { 
-            "Tests\\Az\\Route\\": "vendor/alpha-zeta/route/tests/"
+            "Tests\\Az\\Route\\": "tests/"
         }
     }
 }
