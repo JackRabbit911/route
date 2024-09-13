@@ -51,7 +51,15 @@ final class HandlerWrapperMiddleware implements MiddlewareInterface
 
             foreach ($reflect->getParameters() as $param) {
                 $name = $param->getName();
-                $args[$name] = $attr[$name] ?? $param->getDefaultValue() ?? null;
+                // $args[$name] = $attr[$name] ?? $param->getDefaultValue() ?? null;
+
+                if (isset($attr[$name])) {
+                    $args[$name] = $attr[$name];
+                } elseif ($param->isDefaultValueAvailable()) {
+                    $args[$name] = $param->getDefaultValue();
+                } else {
+                    $args[$name] = null;
+                }
             }
 
             if (is_callable($action)) {

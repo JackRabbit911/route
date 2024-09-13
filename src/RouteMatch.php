@@ -24,7 +24,10 @@ final class RouteMatch
     public function parse(ServerRequestInterface $request, $pattern)
     {
         $pattern = $this->santizePattern($pattern);
-        $path = rawurldecode(rtrim($request->getUri()->getPath(), '/'));
+        // $path = rawurldecode(rtrim($request->getUri()->getPath(), '/'));
+
+        $path = $request->getServerParams()['PATH_INFO'] ?? $request->getUri()->getPath();
+        $path = rawurldecode(rtrim($path, '/'));
 
         if (preg_match('~^' . $pattern . '$~i', $path, $matches)) {
             return array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
@@ -32,18 +35,6 @@ final class RouteMatch
 
         return false;
     }
-
-    // public function parsePrefix(ServerRequestInterface $request)
-    // {
-    //     $path = rawurldecode(rtrim($request->getUri()->getPath(), '/'));
-    //     $pattern = $this->santizePattern($this->route->getGroupPrefix($request));
-
-    //     if (preg_match('~^' . $pattern . '~i', $path, $matches)) {
-    //         return $matches[0];
-    //     }
-
-    //     return '';
-    // }
 
     public function path(array $params = []): string
     {
@@ -71,7 +62,8 @@ final class RouteMatch
         }, $this->route->getPattern());
 
         $path = preg_replace('~\/{2,}~', '/', $path);
-        return '/' . trim($path, '/');
+        // return '/' . trim($path, '/');
+        return trim($path, '/');
     }
 
     private function santizePattern(string $pattern)
