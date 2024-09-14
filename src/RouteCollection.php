@@ -22,6 +22,14 @@ final class RouteCollection implements RouteCollectionInterface
     private array $methods = [];
     private array $allowAttribute = [];
 
+    public function __construct(ServerRequestInterface $request)
+    {
+        $path_info = rawurldecode($request->getServerParams()['PATH_INFO'] ?? '');
+        $path = rawurldecode($request->getUri()->getPath());
+
+        define('URI_PREFIX', str_replace($path_info, '/', $path));
+    }
+
     public function group(string $prefix, callable $callback): self
     {
         $previousGroupPrefix = $this->groupPrefix;
