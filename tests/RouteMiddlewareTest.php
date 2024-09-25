@@ -11,17 +11,19 @@ use HttpSoft\Message\ServerRequest;
 use HttpSoft\Message\UriFactory;
 use HttpSoft\Runner\MiddlewareResolver;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class RouteMiddlewareTest extends TestCase
 {
     private ServerRequest $request;
     private RouteCollection $router;
-    private RequestHandler $handler;
+    private RequestHandlerInterface $handler;
 
     public function setUp(): void
     {
+        error_reporting(E_ALL);
         $this->request = new ServerRequest();
-        $this->router = new RouteCollection();
+        $this->router = new RouteCollection($this->request);
         $this->handler = new RequestHandler(function ($request) {
             return $request->getAttribute('str');
         });

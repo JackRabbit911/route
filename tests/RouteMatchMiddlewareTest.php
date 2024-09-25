@@ -12,17 +12,18 @@ use HttpSoft\Message\UriFactory;
 use HttpSoft\Runner\MiddlewareResolver;
 use HttpSoft\Response\TextResponse;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class RouteMatchMiddlewareTest extends TestCase
 {
     private ServerRequest $request;
     private RouteCollection $router;
-    private RequestHandler $handler;
+    private RequestHandlerInterface $handler;
 
     public function setUp(): void
     {
         $this->request = new ServerRequest();
-        $this->router = new RouteCollection();
+        $this->router = new RouteCollection($this->request);
         $this->handler = new RequestHandler(function ($request) {
             $route = $request->getAttribute(Route::class);
 

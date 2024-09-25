@@ -12,17 +12,18 @@ use HttpSoft\Message\UriFactory;
 use HttpSoft\Runner\MiddlewareResolver;
 use HttpSoft\Response\TextResponse;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class RouteDispatchMiddlewareTest extends TestCase
 {
     private ServerRequest $request;
     private Route $route;
-    private RequestHandler $handler;
+    private RequestHandlerInterface $handler;
 
     public function setUp(): void
     {
         $this->request = new ServerRequest();
-        $router = new RouteCollection();
+        $router = new RouteCollection($this->request);
 
         $this->route = $router->get('/bar/{slug?}', function ($slug = 'Hello!') {
             return $slug;

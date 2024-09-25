@@ -18,12 +18,13 @@ use HttpSoft\Response\XmlResponse;
 use Psr\Http\Server\MiddlewareInterface;
 
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Server\RequestHandlerInterface;
 
 final class HandlerWrapperMiddlewareTest extends TestCase
 {
     private ServerRequest $request;
     private Route $route;
-    private RequestHandler $handler;
+    private RequestHandlerInterface $handler;
     private MiddlewareInterface $sut;
 
     public function setUp(): void
@@ -32,7 +33,7 @@ final class HandlerWrapperMiddlewareTest extends TestCase
         $this->request = new ServerRequest();
         $this->request = $this->request->withUri($uri);
 
-        $router = new RouteCollection();
+        $router = new RouteCollection($this->request);
 
         $this->route = $router->get('/foo', function () {
             return 'Hello';

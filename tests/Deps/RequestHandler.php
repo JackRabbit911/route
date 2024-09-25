@@ -18,6 +18,11 @@ final class RequestHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $str = call_user_func($this->callable, $request);
-        return (is_string($str)) ? new TextResponse($str) : $str;
+        
+        $str = (is_string($str)) ? new TextResponse($str) : $str;
+
+        // var_dump($str);
+
+        return $str;
     }
 }
