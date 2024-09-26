@@ -17,7 +17,7 @@ final class RouteCollectionTest extends TestCase
     public function setUp(): void
     {
         $this->request = new ServerRequest();
-        $this->router = new RouteCollection($this->request);
+        $this->router = new RouteCollection();
     }
 
     public function testAdd()

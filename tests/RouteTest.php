@@ -15,12 +15,6 @@ final class RouteTest extends TestCase
 
     public function setUp(): void
     {
-        // error_reporting(E_ALL);
-
-        if (!defined('URU_PREFIX')) {
-            define('URI_PREFIX', '/');
-        }
-
         $this->request = new ServerRequest();
     }
 

@@ -23,7 +23,7 @@ final class RouteDispatchMiddlewareTest extends TestCase
     public function setUp(): void
     {
         $this->request = new ServerRequest();
-        $router = new RouteCollection($this->request);
+        $router = new RouteCollection();
 
         $this->route = $router->get('/bar/{slug?}', function ($slug = 'Hello!') {
             return $slug;

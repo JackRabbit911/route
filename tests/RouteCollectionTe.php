@@ -36,7 +36,7 @@ final class RouteCollectionTest extends TestCase
 
         $request = ServerRequestCreator::createFromGlobals($server);
 
-        $route = new RouteCollection($request);
+        $route = new RouteCollection();
 
         $route->group('/api', function() use ($route) {
             $route->get('api.index', '', 'handler::index');

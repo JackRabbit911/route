@@ -23,7 +23,7 @@ final class RouteMatchMiddlewareTest extends TestCase
     public function setUp(): void
     {
         $this->request = new ServerRequest();
-        $this->router = new RouteCollection($this->request);
+        $this->router = new RouteCollection();
         $this->handler = new RequestHandler(function ($request) {
             $route = $request->getAttribute(Route::class);
 

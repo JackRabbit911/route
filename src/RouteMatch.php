@@ -15,10 +15,12 @@ final class RouteMatch
 
     private Route $route;
     private array $delimeters = [];
+    private $uriPrefix;
 
     public function __construct(Route $route)
     {
         $this->route = $route;
+        $this->uriPrefix = $GLOBALS['URI_PREFIX'] ?? '/';
     }
 
     public function parse(ServerRequestInterface $request, $pattern)
@@ -26,7 +28,9 @@ final class RouteMatch
         $pattern = $this->santizePattern($pattern);
 
         $path = $request->getUri()->getPath();
-        $path = str_replace(rtrim(URI_PREFIX, '/'), '', rawurldecode(rtrim($path, '/')));
+        $path = rawurldecode(rtrim($path, '/'));
+
+        // $path = str_replace(rtrim($this->uriPrefix, '/'), '', rawurldecode(rtrim($path, '/')));
 
         if (preg_match('~^' . $pattern . '$~i', $path, $matches)) {
             return array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
@@ -61,7 +65,10 @@ final class RouteMatch
         }, $this->route->getPattern());
 
         $path = preg_replace('~\/{2,}~', '/', $path);
-        return URI_PREFIX . trim($path, '/');
+
+        return $this->uriPrefix . trim($path, '/');
+
+        // return '/' . trim($path, '/');
     }
 
     private function santizePattern(string $pattern)

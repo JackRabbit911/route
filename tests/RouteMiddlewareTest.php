@@ -23,7 +23,7 @@ final class RouteMiddlewareTest extends TestCase
     {
         error_reporting(E_ALL);
         $this->request = new ServerRequest();
-        $this->router = new RouteCollection($this->request);
+        $this->router = new RouteCollection();
         $this->handler = new RequestHandler(function ($request) {
             return $request->getAttribute('str');
         });

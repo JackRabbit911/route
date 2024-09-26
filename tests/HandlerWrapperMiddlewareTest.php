@@ -33,7 +33,7 @@ final class HandlerWrapperMiddlewareTest extends TestCase
         $this->request = new ServerRequest();
         $this->request = $this->request->withUri($uri);
 
-        $router = new RouteCollection($this->request);
+        $router = new RouteCollection();
 
         $this->route = $router->get('/foo', function () {
             return 'Hello';

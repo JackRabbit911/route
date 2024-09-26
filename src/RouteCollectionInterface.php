@@ -38,7 +38,7 @@ interface RouteCollectionInterface
 
     public function clear(): void;
 
-    public function match(ServerRequestInterface &$request);
+    public function match(ServerRequestInterface $request);
 
     public function path(string $name, array $params): string;
 }
