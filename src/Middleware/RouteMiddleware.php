@@ -8,19 +8,15 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use HttpSoft\Runner\MiddlewarePipeline;
 use Az\Route\Route;
-use Az\Route\RouteCollection;
-use Az\Route\RouteCollectionInterface;
+use Az\Route\RouterInterface;
 use HttpSoft\Runner\MiddlewareResolverInterface;
 
 final class RouteMiddleware implements MiddlewareInterface
 {
-    private RouteCollection $collection;
+    private RouterInterface $collection;
     private MiddlewareResolverInterface $resolver;
 
-    public function __construct(
-        RouteCollectionInterface $collection,
-        MiddlewareResolverInterface $resolver
-    )
+    public function __construct(RouterInterface $collection, MiddlewareResolverInterface $resolver)
     {
         $this->collection = $collection;
         $this->resolver = $resolver;

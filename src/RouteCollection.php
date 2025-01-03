@@ -3,11 +3,10 @@
 namespace Az\Route;
 
 use Az\Route\Route;
-use Az\Exception\HttpException;
-use RuntimeException;
 use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 
-final class RouteCollection implements RouteCollectionInterface
+final class RouteCollection implements RouterInterface, RouteCollectionInterface
 {
     use RouteController;
 
@@ -219,7 +218,7 @@ final class RouteCollection implements RouteCollectionInterface
         $this->routes = [];
     }
 
-    public function match(ServerRequestInterface $request)
+    public function match(ServerRequestInterface $request): mixed
     {
         foreach ($this->routes as $route) {
             $groupPrefix = $route->getGroupPrefix();

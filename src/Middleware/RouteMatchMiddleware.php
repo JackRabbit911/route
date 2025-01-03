@@ -6,7 +6,7 @@ namespace Az\Route\Middleware;
 
 use Az\Route\Route;
 use Az\Route\RouteCollection;
-use Az\Route\RouteCollectionInterface;
+use Az\Route\RouterInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -16,7 +16,7 @@ final class RouteMatchMiddleware implements MiddlewareInterface
 {
     private RouteCollection $router;
 
-    public function __construct(RouteCollectionInterface $route)
+    public function __construct(RouterInterface $route)
     {
         $this->router = $route;
     }
